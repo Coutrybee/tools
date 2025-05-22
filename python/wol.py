@@ -13,5 +13,3 @@ def wake_on_lan(mac_address, broadcast_ip="192.168.1.255"):
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         sock.sendto(magic_packet, (broadcast_ip, 9))  # Puerto 9 es el estándar para WOL
 
-# Llamada a la función con la MAC de tu equipo
-wake_on_lan("D8:BB:C1:42:0E:30")
