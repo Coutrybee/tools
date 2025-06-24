@@ -1,3 +1,8 @@
+# Use:
+#  python convert_bdmv.py \
+#   --bdmv "Ruta/a/BDMV" \
+#   --output "Ruta/donde/guardar/nombre_archivo.mkv"
+
 import os
 import subprocess
 import argparse
@@ -22,6 +27,7 @@ def find_largest_m2ts(stream_folder):
     return os.path.join(stream_folder, largest_file)
 
 def convert_to_mkv(input_m2ts, output_mkv):
+    os.makedirs(os.path.dirname(output_mkv), exist_ok=True)
     cmd = [
         "mkvmerge",
         "-o", output_mkv,
@@ -33,7 +39,7 @@ def convert_to_mkv(input_m2ts, output_mkv):
 def main():
     parser = argparse.ArgumentParser(description="Convertir Blu-ray BDMV a archivo MKV.")
     parser.add_argument('--bdmv', required=True, help='Ruta a la carpeta BDMV')
-    parser.add_argument('--output', required=True, help='Nombre del archivo de salida (ej. pelicula.mkv)')
+    parser.add_argument('--output', required=True, help='Ruta completa al archivo de salida (ej. /ruta/pelicula.mkv)')
 
     args = parser.parse_args()
 
